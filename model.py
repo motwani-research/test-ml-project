@@ -2,22 +2,23 @@ import joblib
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 
-# Train a simple ML model
+MODEL_PATH = "iris_model.pkl"
+
+# Train a simple ML model and save it
 def train_model():
     iris = load_iris()
     X, y = iris.data, iris.target
     model = RandomForestClassifier(n_estimators=10, random_state=42)
     model.fit(X, y)
-    joblib.dump(model, "iris_model.pkl")  # Save the model
-    print("Model trained and saved as iris_model.pkl")
+    joblib.dump(model, MODEL_PATH)
+    print(f"Model trained and saved as {MODEL_PATH}")
 
-# Make a prediction
-def make_prediction():
-    model = joblib.load("iris_model.pkl")  # Load the saved model
-    sample = [[5.1, 3.5, 1.4, 0.2]]  # Example input
-    prediction = model.predict(sample)
-    print(f"Prediction for {sample}: {prediction}")
+# Load model and make a prediction
+def make_prediction(sample):
+    model = joblib.load(MODEL_PATH)  # Load the saved model
+    prediction = model.predict([sample])
+    return prediction.tolist()  # Convert numpy array to a Python list
 
+# If running this file directly, train the model
 if __name__ == "__main__":
-    train_model()  # Train the model
-    make_prediction()  # Make a prediction
+    train_model()
