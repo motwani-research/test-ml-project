@@ -9,7 +9,7 @@ def test():
 
 @app.route("/test", methods=["GET"])
 def test_route():
-    return jsonify({"message": "Testing successful"})
+    return jsonify({"message": "Testing successful...."})
 
 @app.route("/model", methods=["POST"])
 def model_route():
@@ -22,5 +22,5 @@ def predict_route():
     result = test()
     return jsonify(result)
 
-# if __name__ == "__main__":
-#     app.run(host="127.0.0.1", port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5000, debug=True)
